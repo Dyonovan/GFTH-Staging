@@ -40,14 +40,15 @@ if (!defined('ABSPATH')) {
             <tr>
                 <td>
                     <?php foreach($value['attributes'] as $key => $val ) {
-                        $val = str_replace(array('-','_'), ' ', $val);
-                        printf( '<span class="attr attr-%s">%s</span>', $key, ucwords($val) );
+                        $val = str_replace(array('-','_'), ' ', $val);?>
+                        <span class="price"><?php echo ucwords($val); ?></span>
+                         <?php      //printf( '<span class="attr attr-%s">%s</span>', $key, ucwords($val) );
                     } ?>
                 </td>
                 <td>
-                    <?php echo $value['price_html'];?>
+                    <span class="price"><?php echo $value['price_html'];?>
                     <?php $product = new WC_Product($value['variation_id']);
-                    echo $product->get_sku();?>
+                    echo $product->get_sku();?></span>
                 </td>
                 <td>
                     <?php if( $value['is_in_stock'] ) { ?>
