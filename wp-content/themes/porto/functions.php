@@ -137,6 +137,7 @@ add_action('wp_footer',             'porto_footer_hook', 1);
  *  Remove Price From Single Product Page
  */
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
 function porto_css() {
 
