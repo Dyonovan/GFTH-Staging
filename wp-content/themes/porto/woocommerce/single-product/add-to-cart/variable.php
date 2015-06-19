@@ -35,57 +35,130 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         <tbody>
         <?php
         foreach ($variations as $key => $value) {
-            if (!$value['variation_is_visible']) continue;
-            ?>
-            <tr>
-                <td>
-                    <?php foreach ($value['attributes'] as $key => $val) {
-                        $val = str_replace(array('-', '_'), ' ', $val); ?>
-                        <span class="addcart"><?php echo ucwords($val); ?></span>
-                        <?php //printf( '<span class="attr attr-%s">%s</span>', $key, ucwords($val) );
-                    } ?>
-                </td>
-                <td>
+            foreach ($value['attributes'] as $key => $val) {
+                $val = str_replace(array('-', '_'), ' ', $val);
+            }
+            if (strpbrk($val, 'Yes') === false) {
 
-                    <?php $product = new WC_Product($value['variation_id']); ?>
-                    <span class="addcart">$<?php echo $product->get_price(); ?></span>
-                </td>
-                <td>
-                    <span class="addcart"><?php echo $product->get_sku(); ?></span>
-                </td>
-                <td>
-                    <?php if ($value['is_in_stock']) { ?>
-                        <form class="cart" action="<?php echo esc_url($product->add_to_cart_url()); ?>" method="post"
-                              enctype='multipart/form-data'>
-                            <?php woocommerce_quantity_input(); ?>
-                            <?php
-                            if (!empty($value['attributes'])) {
-                                foreach ($value['attributes'] as $attr_key => $attr_value) {
-                                    ?>
-                                    <input type="hidden" name="<?php echo $attr_key ?>"
-                                           value="<?php echo $attr_value ?>">
+                if (!$value['variation_is_visible']) continue;
+                ?>
+                <tr>
+                    <td>
+                        <?php foreach ($value['attributes'] as $key => $val) {
+                            $val = str_replace(array('-', '_'), ' ', $val); ?>
+                            <span class="addcart"><?php echo ucwords($val); ?></span>
+                        <?php
+                        } ?>
+                    </td>
+                    <td>
+                        <?php $product = new WC_Product($value['variation_id']); ?>
+                        <span class="addcart">$<?php echo $product->get_price(); ?></span>
+                    </td>
+                    <td>
+                        <span class="addcart"><?php echo $product->get_sku(); ?></span>
+                    </td>
+                    <td>
+                        <?php if ($value['is_in_stock']) { ?>
+                            <form class="cart" action="<?php echo esc_url($product->add_to_cart_url()); ?>"
+                                  method="post"
+                                  enctype='multipart/form-data'>
+                                <?php woocommerce_quantity_input(); ?>
                                 <?php
+                                if (!empty($value['attributes'])) {
+                                    foreach ($value['attributes'] as $attr_key => $attr_value) {
+                                        ?>
+                                        <input type="hidden" name="<?php echo $attr_key ?>"
+                                               value="<?php echo $attr_value ?>">
+                                    <?php
+                                    }
                                 }
-                            }
-                            ?>
-                            <button type="submit" class="single_add_to_cart_button btn btn-primary"><span
-                                    class="glyphicon glyphicon-tag"></span> Add to cart
-                            </button>
-                            <input type="hidden" name="variation_id" value="<?php echo $value['variation_id'] ?>"/>
-                            <input type="hidden" name="product_id" value="<?php echo esc_attr($post->ID); ?>"/>
-                            <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($post->ID); ?>"/>
-                        </form>
-                    <?php } else { ?>
-                        <p class="stock out-of-stock"><?php _e('This product is currently out of stock and unavailable.', 'woocommerce'); ?></p>
-                    <?php } ?>
-                </td>
-            </tr>
-        <?php } ?>
+                                ?>
+                                <button type="submit" class="single_add_to_cart_button btn btn-primary"><span
+                                        class="glyphicon glyphicon-tag"></span> Add to cart
+                                </button>
+                                <input type="hidden" name="variation_id" value="<?php echo $value['variation_id'] ?>"/>
+                                <input type="hidden" name="product_id" value="<?php echo esc_attr($post->ID); ?>"/>
+                                <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($post->ID); ?>"/>
+                            </form>
+                        <?php } else { ?>
+                            <p class="stock out-of-stock"><?php _e('This product is currently out of stock and unavailable.', 'woocommerce'); ?></p>
+                        <?php } ?>
+                    </td>
+                </tr>
+            <?php }
+        } ?>
         </tbody>
     </table>
+
+    <table class="variations" cellspacing="0">
+
+        <?php
+        $loop = false;
+        foreach ($variations as $key => $value) {
+        foreach ($value['attributes'] as $key => $val) {
+            $val = str_replace(array('-', '_'), ' ', $val);
+        }
+        if (strpbrk($val, 'Yes') !== false) {
+        if ($loop === false) { ?>
+            <thead>
+
+                <th class="barnboard" colspan="3">Barnboard</th>
+
+            </thead>
+            <?php $loop = true;
+        } ?>
+        <tbody>
+        <?php if (!$value['variation_is_visible']) continue;
+        ?>
+        <tr>
+            <td>
+                <?php foreach ($value['attributes'] as $key => $val) {
+                    $val = str_replace(array('-', '_'), ' ', $val); ?>
+                    <span class="addcart"><?php echo ucwords($val); ?></span>
+                <?php
+                } ?>
+            </td>
+            <td>
+                <?php $product = new WC_Product($value['variation_id']); ?>
+                <span class="addcart">$<?php echo $product->get_price(); ?></span>
+            </td>
+            <td>
+                <span class="addcart"><?php echo $product->get_sku(); ?></span>
+            </td>
+            <td>
+                <?php if ($value['is_in_stock']) { ?>
+                    <form class="cart" action="<?php echo esc_url($product->add_to_cart_url()); ?>"
+                          method="post"
+                          enctype='multipart/form-data'>
+                        <?php woocommerce_quantity_input(); ?>
+                        <?php
+                        if (!empty($value['attributes'])) {
+                            foreach ($value['attributes'] as $attr_key => $attr_value) {
+                                ?>
+                                <input type="hidden" name="<?php echo $attr_key ?>"
+                                       value="<?php echo $attr_value ?>">
+                            <?php
+                            }
+                        }
+                        ?>
+                        <button type="submit" class="single_add_to_cart_button btn btn-primary"><span
+                                class="glyphicon glyphicon-tag"></span> Add to cart
+                        </button>
+                        <input type="hidden" name="variation_id" value="<?php echo $value['variation_id'] ?>"/>
+                        <input type="hidden" name="product_id" value="<?php echo esc_attr($post->ID); ?>"/>
+                        <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($post->ID); ?>"/>
+                    </form>
+                <?php } else { ?>
+                    <p class="stock out-of-stock"><?php _e('This product is currently out of stock and unavailable.', 'woocommerce'); ?></p>
+                <?php } ?>
+            </td>
+        </tr>
+        <?php }
+        } ?>
+        </tbody>
+    </table>
+
 <?php
-
-
 function find_valid_variations()
 {
     global $product;
