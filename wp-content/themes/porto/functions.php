@@ -134,11 +134,23 @@ add_action('admin_enqueue_scripts', 'porto_admin_scripts', 100);
 add_action('wp_footer',             'porto_footer_hook', 1);
 
 /**
- *  Remove Price From Single Product Page
+ *  Remove Things From Single Product Page
  */
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+
+/**
+ * Add Custom Hook for Single Product Page add to cart
+ */
+
+add_action( 'custom_single_product_add_to_cart', 'custom_add_to_cart');
+
+function custom_add_to_cart() {
+    global $product;
+    do_action( 'woocommerce_' . $product->product_type . '_add_to_cart'  );
+}
 
 function porto_css() {
 

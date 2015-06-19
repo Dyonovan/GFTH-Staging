@@ -66,6 +66,13 @@ global $porto_layout;
         </div>
     </div><!-- .summary -->
 
+
+    <?php
+        /*
+         * Output Individual Add To Cart
+         */
+        do_action( 'custom_single_product_add_to_cart' );
+    ?>
 	<?php
 		/**
 		 * woocommerce_after_single_product_summary hook
