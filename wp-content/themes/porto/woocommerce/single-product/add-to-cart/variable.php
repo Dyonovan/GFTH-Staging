@@ -46,7 +46,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
                     <td>
                         <?php foreach ($value['attributes'] as $key => $val) {
                             $val = str_replace(array('-', '_'), ' ', $val); ?>
-                            <span class="addcart"><?php echo ucwords($val); ?></span>
+                            <span class="addcart"><?php echo str_replace('No', '',ucwords($val)); ?></span>
                         <?php
                         } ?>
                     </td>
@@ -114,7 +114,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
             <td>
                 <?php foreach ($value['attributes'] as $key => $val) {
                     $val = str_replace(array('-', '_'), ' ', $val); ?>
-                    <span class="addcart"><?php echo ucwords($val); ?></span>
+                    <span class="addcart"><?php echo str_replace('Yes', '',ucwords($val)); ?></span>
                 <?php
                 } ?>
             </td>
