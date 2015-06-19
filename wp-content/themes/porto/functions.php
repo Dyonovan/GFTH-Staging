@@ -147,6 +147,18 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_p
 
 add_action( 'custom_single_product_add_to_cart', 'custom_add_to_cart');
 
+/*
+ * Fix Redirect after add to cart
+ */
+add_filter( 'woocommerce_add_to_cart_redirect', 'rv_redirect_on_add_to_cart' );
+function rv_redirect_on_add_to_cart() {
+    //Get product ID
+    if ( isset( $_POST['add-to-cart'] ) ) {
+        $product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $_POST['add-to-cart'] );
+        return get_permalink( $product_id );
+    }
+}
+
 function custom_add_to_cart() {
     global $product;
     do_action( 'woocommerce_' . $product->product_type . '_add_to_cart'  );
