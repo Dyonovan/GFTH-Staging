@@ -3338,7 +3338,7 @@ dt, dd {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-    background: rgba(36, 27, 28, 0.9);
+    /*background: rgba(36, 27, 28, 0.9);*/
     bottom: 10%;
     color: #fff;
     font-size: 18px;
