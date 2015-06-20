@@ -148,6 +148,11 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_p
 add_action( 'custom_single_product_add_to_cart', 'custom_add_to_cart');
 
 /*
+ * Remove Price from Catagory Page
+ */
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+
+/*
  * Fix Redirect after add to cart
  */
 add_filter( 'woocommerce_add_to_cart_redirect', 'rv_redirect_on_add_to_cart' );

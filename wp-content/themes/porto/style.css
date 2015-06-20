@@ -31,4 +31,10 @@ Text Domain: porto
     text-align: center;
 }
 
+.variations {
+    width: 52%;
+    /*margin: 25%;*/
+    margin-left:auto;
+    margin-right:auto;
+}
 
