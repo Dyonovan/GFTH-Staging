@@ -31,67 +31,13 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
 
 // Cool, lets do our own template!
 ?>
-    <table class="variations" cellspacing="0">
-        <tbody>
-        <?php
-        foreach ($variations as $key => $value) {
-            foreach ($value['attributes'] as $key => $val) {
-                $val = str_replace(array('-', '_'), ' ', $val);
-            }
-            if (strpbrk($val, 'Yes') === false) {
 
-                if (!$value['variation_is_visible']) continue;
-                ?>
-                <tr>
-                    <td class="var-td">
-                        <?php foreach ($value['attributes'] as $key => $val) {
-                            $val = str_replace(array('-', '_'), ' ', $val); ?>
-                            <span class="addcart"><?php echo str_replace('No', '',ucwords($val)); ?></span>
-                        <?php
-                        } ?>
-                    </td>
-                    <td class="var-td">
-                        <?php $product = new WC_Product($value['variation_id']); ?>
-                        <span class="addcart">$<?php echo $product->get_price(); ?></span>
-                    </td>
-                    <td class="var-td">
-                        <span class="addcart"><?php echo $product->get_sku(); ?></span>
-                    </td>
-                    <td>
-                        <?php if ($value['is_in_stock']) { ?>
-                            <form class="cart" action="<?php echo esc_url($product->add_to_cart_url()); ?>"
-                                  method="post"
-                                  enctype='multipart/form-data'>
-                                <?php woocommerce_quantity_input(); ?>
-                                <?php
-                                if (!empty($value['attributes'])) {
-                                    foreach ($value['attributes'] as $attr_key => $attr_value) {
-                                        ?>
-                                        <input type="hidden" name="<?php echo $attr_key ?>"
-                                               value="<?php echo $attr_value ?>">
-                                    <?php
-                                    }
-                                }
-                                ?>
-                                <button type="submit" class="single_add_to_cart_button btn btn-primary"><span
-                                        class="glyphicon glyphicon-tag"></span> Add to cart
-                                </button>
-                                <input type="hidden" name="variation_id" value="<?php echo $value['variation_id'] ?>"/>
-                                <input type="hidden" name="product_id" value="<?php echo esc_attr($post->ID); ?>"/>
-                                <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($post->ID); ?>"/>
-                            </form>
-                        <?php } else { ?>
-                            <p class="stock out-of-stock"><?php _e('This product is currently out of stock and unavailable.', 'woocommerce'); ?></p>
-                        <?php } ?>
-                    </td>
-                </tr>
-            <?php }
-        } ?>
-        </tbody>
-    </table>
 
-    <table class="variations" cellspacing="0">
-
+    <table class="variations_atc" cellspacing="0">
+        <col class="col-atc-size">
+        <col class="col-atc">
+        <col class="col-atc">
+        <col class="col-atc-btn">
         <?php
         $loop = false;
         foreach ($variations as $key => $value) {
@@ -102,7 +48,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         if ($loop === false) { ?>
             <thead>
 
-                <th class="barnboard" colspan="5">With Authentic Barnboard Option</th>
+                <th class="barnboard" colspan="5">Authentic Grey Barnboard</th>
 
             </thead>
             <?php $loop = true;
@@ -111,19 +57,90 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         <?php if (!$value['variation_is_visible']) continue;
         ?>
         <tr>
-            <td>
+            <td class="var-td">
                 <?php foreach ($value['attributes'] as $key => $val) {
                     $val = str_replace(array('-', '_'), ' ', $val); ?>
-                    <span class="addcart"><?php echo str_replace('Yes', '',ucwords($val)); ?></span>
+                    <?php echo str_replace('Yes', '',ucwords($val)); ?>
                 <?php
                 } ?>
-            </td>
-            <td>
+            </td >
+            <td class="var-td">
                 <?php $product = new WC_Product($value['variation_id']); ?>
-                <span class="addcart">$<?php echo $product->get_price(); ?></span>
+                $<?php echo $product->get_price(); ?>
+            </td >
+            <td class="var-td">
+                <?php echo $product->get_sku(); ?>
             </td>
             <td>
-                <span class="addcart"><?php echo $product->get_sku(); ?></span>
+                <?php if ($value['is_in_stock']) { ?>
+                    <form class="cart" action="<?php echo esc_url($product->add_to_cart_url()); ?>"
+                          method="post"
+                          enctype='multipart/form-data'>
+                        <?php woocommerce_quantity_input(); ?>
+                        <?php
+                        if (!empty($value['attributes'])) {
+                            foreach ($value['attributes'] as $attr_key => $attr_value) {
+                                ?>
+                                <input type="hidden" name="<?php echo $attr_key ?>"
+                                       value="<?php echo $attr_value ?>">
+                            <?php
+                            }
+                        }
+                        ?>
+                        <button type="submit" class="single_add_to_cart_button btn btn-primary"><span
+                                class="glyphicon glyphicon-tag"></span> Add to cart
+                        </button>
+                        <input type="hidden" name="variation_id" value="<?php echo $value['variation_id'] ?>"/>
+                        <input type="hidden" name="product_id" value="<?php echo esc_attr($post->ID); ?>"/>
+                        <input type="hidden" name="add-to-cart" value="<?php echo esc_attr($post->ID); ?>"/>
+                    </form>
+                <?php } else { ?>
+                    <p class="stock out-of-stock"><?php _e('This product is currently out of stock and unavailable.', 'woocommerce'); ?></p>
+                <?php } ?>
+            </td>
+        </tr>
+        <?php }
+        } ?>
+        </tbody>
+    </table>
+
+    <table class="variations_atc" cellspacing="0">
+        <col class="col-atc-size">
+        <col class="col-atc">
+        <col class="col-atc">
+        <col class="col-atc-btn">
+        <?php
+        $loop = false;
+        foreach ($variations as $key => $value) {
+        foreach ($value['attributes'] as $key => $val) {
+            $val = str_replace(array('-', '_'), ' ', $val);
+        }
+        if (strpbrk($val, 'Yes') === false) {
+        if ($loop === false) { ?>
+            <thead>
+
+            <th class="reg-frame" colspan="5">Regular Framing</th>
+
+            </thead>
+            <?php $loop = true;
+        } ?>
+        <tbody>
+        <?php if (!$value['variation_is_visible']) continue;
+        ?>
+        <tr>
+            <td class="var-td">
+                <?php foreach ($value['attributes'] as $key => $val) {
+                    $val = str_replace(array('-', '_'), ' ', $val); ?>
+                    <?php echo str_replace('No', '',ucwords($val)); ?>
+                <?php
+                } ?>
+            </td >
+            <td class="var-td">
+                <?php $product = new WC_Product($value['variation_id']); ?>
+                $<?php echo $product->get_price(); ?>
+            </td >
+            <td class="var-td">
+                <?php echo $product->get_sku(); ?>
             </td>
             <td>
                 <?php if ($value['is_in_stock']) { ?>
