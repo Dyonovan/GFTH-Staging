@@ -20,22 +20,25 @@ Text Domain: porto
     color: #7A0000;
     line-height: 1;
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1.0em;
 }
 
 .barnboard {
-    color: #000000;
+    color: #555555;
     line-height: 1;
     font-weight: 600;
-    font-size: 1.5em;
+    font-size: 1.3em;
     text-align: center;
 }
 
 .variations {
-    width: 55%;
+    width: 50%;
     /*margin: 25%;*/
     margin-left:auto;
     margin-right:auto;
 }
 
+.var-td {
+    text-align: center;
+}
 

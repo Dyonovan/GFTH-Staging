@@ -43,18 +43,18 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
                 if (!$value['variation_is_visible']) continue;
                 ?>
                 <tr>
-                    <td>
+                    <td class="var-td">
                         <?php foreach ($value['attributes'] as $key => $val) {
                             $val = str_replace(array('-', '_'), ' ', $val); ?>
                             <span class="addcart"><?php echo str_replace('No', '',ucwords($val)); ?></span>
                         <?php
                         } ?>
                     </td>
-                    <td>
+                    <td class="var-td">
                         <?php $product = new WC_Product($value['variation_id']); ?>
                         <span class="addcart">$<?php echo $product->get_price(); ?></span>
                     </td>
-                    <td>
+                    <td class="var-td">
                         <span class="addcart"><?php echo $product->get_sku(); ?></span>
                     </td>
                     <td>
@@ -102,7 +102,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         if ($loop === false) { ?>
             <thead>
 
-                <th class="barnboard" colspan="3">Barnboard</th>
+                <th class="barnboard" colspan="5">With Authentic Barnboard Option</th>
 
             </thead>
             <?php $loop = true;
