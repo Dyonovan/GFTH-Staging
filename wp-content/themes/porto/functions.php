@@ -164,6 +164,19 @@ function rv_redirect_on_add_to_cart() {
     }
 }
 
+/*
+ * Change add to cart message
+ */
+add_filter( 'wc_add_to_cart_message', 'custom_add_to_cart_message' );
+
+function custom_add_to_cart_message() {
+
+    global $woocommerce;
+    $return_to  = get_permalink(woocommerce_get_page_id('cart'));
+    $message    = sprintf('<a href="%s" class="button wc-forwards">%s</a> %s', $return_to, __('View Cart', 'woocommerce'), __('      Product successfully added to your cart. Click the arrows above to continue shopping.', 'woocommerce') );
+    return $message;
+}
+
 function custom_add_to_cart() {
     global $product;
     do_action( 'woocommerce_' . $product->product_type . '_add_to_cart'  );
