@@ -32,7 +32,6 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
 // Cool, lets do our own template!
 ?>
 
-
     <table class="variations_atc" cellspacing="0">
         <col class="col-atc-size">
         <col class="col-atc">
@@ -42,12 +41,11 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         $loop = false;
         foreach ($variations as $key => $value) {
         $product = new WC_Product($value['variation_id']);
-        if (strcmp(substr($product->get_sku(), -2), 'BB') === 0 ) {
+        if (strcmp(substr($product->get_sku(), -2), 'BB') !== 0 ) {
         if ($loop === false) { ?>
             <thead>
 
-            <th class="barnboard" colspan="5">Authentic Grey Barnboard</th>
-            <th class="reg-frame-mobile" colspan="5">Barnboard Frame</th>
+            <th class="reg-frame" colspan="5">Regular Framing</th>
             </thead>
             <?php $loop = true;
         } ?>
@@ -58,11 +56,12 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
             <td class="var-td">
                 <?php foreach ($value['attributes'] as $key => $val) {
                     $val = str_replace(array('-', '_'), ' ', $val); ?>
-                    <?php echo str_replace(array('Yes', 'No'), '', ucwords($val)); ?>
+                    <?php echo str_replace(array('No', 'Yes'), '', ucwords($val)); ?>
                 <?php
                 } ?>
             </td>
             <td class="var-td">
+                <?php $product = new WC_Product($value['variation_id']); ?>
                 $<?php echo $product->get_price(); ?>
             </td>
             <td class="var-td">
@@ -110,11 +109,12 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         $loop = false;
         foreach ($variations as $key => $value) {
         $product = new WC_Product($value['variation_id']);
-        if (strcmp(substr($product->get_sku(), -2), 'BB') !== 0 ) {
+        if (strcmp(substr($product->get_sku(), -2), 'BB') === 0 ) {
         if ($loop === false) { ?>
             <thead>
 
-            <th class="reg-frame" colspan="5">Regular Framing</th>
+            <th class="barnboard" colspan="5">Authentic Grey Barnboard</th>
+            <th class="reg-frame-mobile" colspan="5">Barnboard Frame</th>
             </thead>
             <?php $loop = true;
         } ?>
@@ -125,12 +125,11 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
             <td class="var-td">
                 <?php foreach ($value['attributes'] as $key => $val) {
                     $val = str_replace(array('-', '_'), ' ', $val); ?>
-                    <?php echo str_replace(array('No', 'Yes'), '', ucwords($val)); ?>
+                    <?php echo str_replace(array('Yes', 'No'), '', ucwords($val)); ?>
                 <?php
                 } ?>
             </td>
             <td class="var-td">
-                <?php $product = new WC_Product($value['variation_id']); ?>
                 $<?php echo $product->get_price(); ?>
             </td>
             <td class="var-td">
