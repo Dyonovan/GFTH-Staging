@@ -47,7 +47,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
             <thead>
 
             <th class="barnboard" colspan="5">Authentic Grey Barnboard</th>
-
+            <th class="reg-frame-mobile" colspan="5">Barnboard Frame</th>
             </thead>
             <?php $loop = true;
         } ?>
@@ -115,7 +115,6 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
             <thead>
 
             <th class="reg-frame" colspan="5">Regular Framing</th>
-
             </thead>
             <?php $loop = true;
         } ?>
