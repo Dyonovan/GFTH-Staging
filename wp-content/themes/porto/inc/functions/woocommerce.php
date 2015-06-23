@@ -378,7 +378,7 @@ function porto_product_quickview() {
             </div>
         </div>
     </div>
-
+    <?php do_action( 'custom_single_product_add_to_cart');?>
     <?php
 
     die();

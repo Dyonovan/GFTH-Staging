@@ -144,7 +144,6 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_p
 /**
  * Add Custom Hook for Single Product Page add to cart
  */
-
 add_action( 'custom_single_product_add_to_cart', 'custom_add_to_cart');
 
 /*
