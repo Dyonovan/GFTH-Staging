@@ -145,7 +145,7 @@ if ( is_woocommerce_active() ) {
 					default :
 						$selector = "'a.quick-view-button'";
 
-						add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 5 );
+						//add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 5 );
 					break;
 				}
 

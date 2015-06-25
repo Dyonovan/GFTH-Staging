@@ -141,6 +141,7 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 
+
 /**
  * Add Custom Hook for Single Product Page add to cart
  */
@@ -154,19 +155,36 @@ remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_l
 /*
  * Fix Redirect after add to cart
  */
-add_filter( 'woocommerce_add_to_cart_redirect', 'rv_redirect_on_add_to_cart' );
+/*add_filter( 'woocommerce_add_to_cart_redirect', 'rv_redirect_on_add_to_cart' );*/
+add_filter ('add_to_cart_redirect', 'redirect_to_previousCat');
 function rv_redirect_on_add_to_cart() {
     //Get product ID
     if ( isset( $_POST['add-to-cart'] ) ) {
         $product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $_POST['add-to-cart'] );
-        return get_permalink( $product_id );
+        global $wp;
+        $current_url = home_url( add_query_arg( NULL, NULL ) );
+        return  $current_url;//get_permalink( $product_id );
     }
+}
+function redirect_to_previousCat( $url ) {
+    $product_id = absint( $_REQUEST['add-to-cart'] );
+    $product_cat_slug = '';
+
+    $terms = get_the_terms( $product_id, 'product_cat' );
+    foreach ( $terms as $term ) {
+        $product_cat_slug = $term->slug;
+        break;
+    }
+    if( $product_cat_slug ){
+        $url = add_query_arg( 'product_cat', $product_cat_slug, site_url() );
+    }
+    return $url;
 }
 
 /*
  * Change add to cart message
  */
-add_filter( 'wc_add_to_cart_message', 'custom_add_to_cart_message' );
+//add_filter( 'wc_add_to_cart_message', 'custom_add_to_cart_message' );
 
 function custom_add_to_cart_message() {
 
