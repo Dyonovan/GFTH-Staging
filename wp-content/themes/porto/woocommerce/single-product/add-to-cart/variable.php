@@ -31,7 +31,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
 
 // Cool, lets do our own template!
 ?>
-
+<div class="div-tables">
     <table class="variations_atc" cellspacing="0">
         <col class="col-atc-size">
         <col class="col-atc">
@@ -100,7 +100,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         </tbody>
     </table>
 
-    <table class="variations_atc_2" cellspacing="0">
+    <table class="variations_atc" cellspacing="0">
         <col class="col-atc-size">
         <col class="col-atc">
         <col class="col-atc">
@@ -167,7 +167,7 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         } ?>
         </tbody>
     </table>
-
+</div>
 <?php
 function find_valid_variations()
 {

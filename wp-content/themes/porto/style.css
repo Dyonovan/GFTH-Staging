@@ -54,12 +54,8 @@ Text Domain: porto
     /*display: inline-block;*/
 }
 
-.variations_atc_2 {
-    width: 60%;
-    margin-left:38%;
-    padding: 1px;
-    table-layout: auto;
-    /*display: inline-block;*/
+.div-table {
+    text-align:center;
 }
 
 .var-td {
