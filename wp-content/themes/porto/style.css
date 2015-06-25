@@ -36,6 +36,13 @@ Text Domain: porto
     display: none;
 }
 
+.frame-orig {
+    border-color: #000000 !important;
+    background-color: #000000 !important;
+}
+
+div.woocommerce-wrap a.button { display: none; }
+
 .reg-frame {
     color: #555555;
     line-height: 1;
@@ -86,6 +93,9 @@ Text Domain: porto
         display: block;
     }
 
+    .div-table {
+        text-align:center;
+    }
     /* Hide table headers (but not display: none;, for accessibility) */
     /*thead tr {
         position: absolute;

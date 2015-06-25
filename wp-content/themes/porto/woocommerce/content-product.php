@@ -51,7 +51,7 @@ if ($woocommerce_loop['product_loop'] % $porto_products_cols_ls == 1)
     <div class="product-image">
 
 
-        <a class="quick-view-button button" href="<?php echo get_site_url() . '/?wc-api=WC_Quick_View&product=' . $product->id . '&width=70%&height=60%&ajax=true';//the_permalink(); ?>">
+        <a class="quick-view-button" href="<?php echo get_site_url() . '/?wc-api=WC_Quick_View&product=' . $product->id . '&width=70%&height=60%&ajax=true';//the_permalink(); ?>">
             <?php
                 /**
                  * woocommerce_before_shop_loop_item_title hook

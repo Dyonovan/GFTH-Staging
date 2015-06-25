@@ -40,8 +40,8 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
         <?php
         $loop = false;
         foreach ($variations as $key => $value) {
-        $product = new WC_Product($value['variation_id']);
-        if (strcmp(substr($product->get_sku(), -2), 'BB') !== 0 ) {
+        $productvar = new WC_Product($value['variation_id']);
+        if (strcmp(substr($productvar->get_sku(), -2), 'BB') !== 0 ) {
         if ($loop === false) { ?>
             <thead>
 
@@ -61,11 +61,15 @@ if (get_post_meta($post->ID, 'price_grid', true)) {
                 } ?>
             </td>
             <td class="var-td">
-                <?php $product = new WC_Product($value['variation_id']); ?>
-                $<?php echo $product->get_price(); ?>
+                <?php $productvar = new WC_Product($value['variation_id']); ?>
+                $<?php echo $productvar->get_price(); ?>
             </td>
             <td class="var-td">
-                <?php echo $product->get_sku(); ?>
+                <?php if ($productvar->get_sku() == '') {
+                    echo $product->get_sku();
+                } else {
+                    echo $productvar->get_sku();
+                }?>
             </td>
             <td>
                 <?php if ($value['is_in_stock']) { ?>
