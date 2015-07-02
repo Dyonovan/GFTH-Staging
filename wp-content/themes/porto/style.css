@@ -51,8 +51,10 @@ div.woocommerce-wrap a.button { display: none; }
     text-align: center;
 }
 
+
+
 .variations_atc {
-    width: 60%;
+    width: 100%;
     /*margin: 25%;
     margin-left:25%;
     margin-right:auto;*/
