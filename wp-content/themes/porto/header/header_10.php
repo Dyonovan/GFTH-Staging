@@ -70,15 +70,17 @@ $search_size = $porto_settings['search-size'];
                         echo '<div class="header-contact">' . force_balance_tags($contact_info) . '</div>';
 
                     // show search form
-                    echo porto_search_form();
+                    //echo porto_search_form();
 
                     // show mobile toggle
                     ?>
                     <a class="mobile-toggle"><i class="fa fa-reorder"></i></a>
                 </div>
                 <div class="header-right-bottom">
+                    <?php echo porto_search_form_content();?>
                     <div id="main-menu">
                         <?php
+
                         // show main menu
                         echo porto_main_menu();
                         ?>
