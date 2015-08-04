@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
         $('#product_submit').attr('disabled', true);
 
         var form_data = new FormData();
-        form_data.append('csv', $('input[type=file]')[0].files[0]);
+        form_data.append('csv', $('input[type=file]')[1].files[0]);
         form_data.append('test', $("input:radio[name ='test']:checked").val());
         form_data.append('do', 'upload_products');
         form_data.append('action', 'gfth_get_results');
