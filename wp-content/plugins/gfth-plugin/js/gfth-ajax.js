@@ -59,7 +59,8 @@ jQuery(document).ready(function ($) {
                 $('#gfth_loading_download_text').hide();
                 $('#price_upload').attr('disabled', false);
                 $('#price_download').attr('disabled', false);
-                var w = window.open('http://giftsfromthe.staging.wpengine.com/wp-content/uploads/csv-downloads/product-prices.csv', 'CSVDownload');
+                //var w = window.open('http://giftsfromtheheart.staging.wpengine.com/wp-content/uploads/csv-downloads/product-prices.csv', 'CSVDownload');
+                var w = window.open(response, 'CSVDownload');
             }});
 
         return false;

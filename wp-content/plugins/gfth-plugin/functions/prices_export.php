@@ -24,6 +24,8 @@ class export_table_to_csv
             fputcsv($fp, $fields);
         }
         fclose($fp);
+
+        echo $upload_dir['baseurl'] . '/csv-downloads/' . $filename . '.csv';
         exit;
     }
 
