@@ -1,0 +1,3 @@
+[submodule "wp-content/plugins/gfth-plugin"]
+	path = wp-content/plugins/gfth-plugin
+	url = https://github.com/Dyonovan/gfth-plugin.git
