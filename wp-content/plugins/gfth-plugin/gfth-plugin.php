@@ -134,7 +134,7 @@ function gfth_process_ajax()
         new prices_import($csvAsArray);
 
         exit;
-    } else {
+    } else if ($_POST['do'] == 'upload_products'){
 
         if (empty($_FILES['csv']['name']) || $_FILES['csv']['error'] > 0) {
             echo "<script type='text/javascript'> alert('Please select a valid file...')</script>";
@@ -147,10 +147,11 @@ function gfth_process_ajax()
             new import_new_products($csvAsArray, true);
         elseif ($_POST['test'] == "No")
             new import_new_products($csvAsArray, false);
-        else
-            echo "<script type='text/javascript'> alert('Dyo screwed up...')</script>";
+
+        exit;
     }
+    echo "<script type='text/javascript'> alert('Something went wrong...')</script>";
     exit;
 }
-
 add_action('wp_ajax_gfth_get_results', 'gfth_process_ajax');
+

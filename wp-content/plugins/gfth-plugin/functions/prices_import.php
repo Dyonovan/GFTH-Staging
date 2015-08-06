@@ -25,7 +25,7 @@ class prices_import
             }
 
             //Check for size in db
-            $size = get_term_by('name', $data[2], 'pa_size');
+            $size = get_term_by('slug', $data[2], 'pa_size');
             if (!$size) {
                 echo '<span style="color: #ff0000">Failed on ' .  $data[1] . ' (Finding Size)</span><br>';
                 continue;
@@ -33,15 +33,26 @@ class prices_import
 
             //check to see if we need to update title
             $parentid = get_post_ancestors($data[4]);
-            if (trim($data[0]) != get_the_title($parentid)) {
+            if (trim($data[0]) != get_the_title($parentid[0])) {
                 $array = array(
-                    'ID'            => $parentid,
+                    'ID'            => $parentid[0],
                     'post_title'    => trim($data[0])
                 );
                 wp_update_post($array);
                 $title_count++;
             }
 
+            //Make sure size is attached to parent
+            $terms = wp_get_object_terms($parentid, 'pa_size');
+            $found = false;
+            foreach ($terms as $term) {
+                if ($term->slug == $size->slug) {
+                    $found = true;
+                }
+            }
+            if (!$found) {
+                wp_set_object_terms($parentid[0], $size->term_id, 'pa_size', true);
+            }
             //Update Sku, size, price
             update_post_meta($data[4], 'attribute_pa_size', (string)$size->slug);
             update_post_meta($data[4], '_sku', trim($data[1]));
